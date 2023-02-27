@@ -3,3 +3,4 @@
 ### member
 + Xueyan Huang
 + Ting Xu
++ Xiangchi Yuan
