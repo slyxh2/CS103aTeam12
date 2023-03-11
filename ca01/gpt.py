@@ -49,10 +49,11 @@ class GPT():
     this method asks chatGPT if the following team can win the champion this year
     (any sports including soccer,basketball,F1 etc) and provide explanation
     '''
-    def sport_analyst(self):
-        question=input("which sports team you want to ask about?")
+    def sport_analyst(self,teamName):
         prompt="Can this team win the champion of this year? please explain"
-        print(self.getResponse(prompt+question))
+        res=self.getResponse(prompt+teamName)
+        print(res)
+        return res
 
 if __name__=='__main__':
     '''
