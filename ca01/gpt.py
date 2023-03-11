@@ -45,9 +45,19 @@ class GPT():
         response = completion.choices[0].text
         return response
 
+    '''
+    this method asks chatGPT if the following team can win the champion this year
+    (any sports including soccer,basketball,F1 etc) and provide explanation
+    '''
+    def sport_analyst(self):
+        question=input("which sports team you want to ask about?")
+        prompt="Can this team win the champion of this year? please explain"
+        print(self.getResponse(prompt+question))
+
 if __name__=='__main__':
     '''
     '''
     import os
     g = GPT(os.environ.get("APIKEY"))
     print(g.getResponse("what does openai's GPT stand for?"))
+    g.sport_analyst()
