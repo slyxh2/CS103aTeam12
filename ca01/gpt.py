@@ -54,6 +54,15 @@ class GPT():
         res=self.getResponse(prompt+teamName)
         print(res)
         return res
+    '''
+    this method tell you how the food taste like
+    '''
+    def food_taster(self,foodName):
+        prompt="Tell me how the follow food taste."
+        res=self.getResponse(prompt+foodName)
+        print(res)
+        return res
+    
 
 if __name__=='__main__':
     '''

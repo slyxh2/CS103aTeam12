@@ -70,6 +70,13 @@ def team():
     this year's champion race. To be honst, the result is quite inaccurate as chatGPT mostly reies <br>
     data before 2022.
     </p>
+    <h2>Xueyan Huang</h2>
+    <p>
+    Hi, this is Xueyan. I am currently enrolled in the Master of Computer Science program<br>
+    I have a deep interest in Frontend/Full-Stack development.<br><br>
+    I created copy the gpy.py and gptwebapp.py and push them in github repository.<br>
+    I also built the Food Taster chatGPT query web.<br>
+    </p>
     <a href="{url_for('about')}">BACK</a>
     '''
 
@@ -80,6 +87,8 @@ def index():
     return f'''
     <h1> Here you can try the chatGPT answerMachine by each of us</h1>
     <a href="{url_for('ge_form')}">Ge Gao's sports Champion Predictor</a>
+    <br>
+    <a href="{url_for('huang_form')}">Xueyan Huang's food taster</a>
     <br>
     <a href="{url_for('about')}">BACK</a>
 
@@ -113,6 +122,35 @@ def ge_form():
         <br>
         <a href="{url_for('index')}">BACK</a>
         '''
+# Xueyan Huang's Form
+@app.route('/huang_form', methods=['GET', 'POST'])
+def huang_form():
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        answer = gptAPI.food_taster(prompt)
+        return f'''
+        <h1>Xueyan Huang's food taster</h1>
+        <pre style="bgcolor:yellow">{prompt}</pre>
+        <hr>
+        Here is the answer in text mode:
+        <div style="border:thin solid black">{answer}</div>
+        Here is the answer in "pre" mode:
+        <pre style="border:thin solid black">{answer}</pre>
+        <a href={url_for('huang_form')}> Try another food</a>
+        <br>
+        <a href="{url_for('index')}">BACK</a>
+        '''
+    else:
+        return '''
+        <h1>Xueyan Huang's food taster</h1>
+        Please enter the food name
+        <form method="post">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response">
+        </form>
+        '''
+ 
+ 
 @app.route('/gptdemo', methods=['GET', 'POST'])
 def gptdemo():
     ''' handle a get request by sending a form 
