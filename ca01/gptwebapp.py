@@ -77,6 +77,17 @@ def team():
     I created copy the gpy.py and gptwebapp.py and push them in github repository.<br>
     I also built the Food Taster chatGPT query web.<br>
     </p>
+    <h2>Ting Xu</h2>
+    <p>
+    Hi, this is Ting. I am from Ningbo, China and I love swimming and singing. <br>
+    As a product manager for Fund Management at my last company, I was instrumental in establishing the firm’s financial accounting system. <br>
+    I witnessed tremendous changes brought about by information technology. And it ignites my strong passion to delve into the computer science field.<br>
+    <br>
+    For this GPT app, I built a query page about travel plan. When people travel, they always worry about local attractions and food. <br>
+    If you can make a strategy before traveling, you can save a lot of time and improve the quality of travel.
+    </p>
+    
+    
     <a href="{url_for('about')}">BACK</a>
     '''
 
@@ -89,6 +100,9 @@ def index():
     <a href="{url_for('ge_form')}">Ge Gao's sports Champion Predictor</a>
     <br>
     <a href="{url_for('huang_form')}">Xueyan Huang's food taster</a>
+    <br>
+    <a href="{url_for('ting_form')}">Ting Xu's Travel Helper</a>
+    <br>
     <br>
     <a href="{url_for('about')}">BACK</a>
 
@@ -150,7 +164,41 @@ def huang_form():
         </form>
         '''
  
- 
+ # Ting Xu Travel Helper page
+@app.route("/ting_form",methods=['GET', 'POST'])
+def ting_form():
+    if request.method=='POST':
+        teamName=request.form['prompt']
+        answer=gptAPI.sport_analyst(teamName)
+        return f'''
+        <h1>Your Travel Helper</h1>
+        <h2>Are you tired of looking for popular spots when you are planning your travels? Are you having trouble finding local delicacies? <br>
+        Now, this Travel Helper can help you solve your troubles! <br>
+        As long as you enter everything about travel plans, it can answer you!
+        </h2>
+        <pre style="bgcolor:yellow">{teamName}</pre>
+        <hr>
+        Here is the answer in text mode:
+        <div style="border:thin solid black">{answer}</div>
+        Here is the answer in "pre" mode:
+        <pre style="border:thin solid black">{answer}</pre>
+        <a href={url_for('ting_form')}> Ask something else! </a>
+        <br>
+        <a href="{url_for('index')}">BACK</a>
+        '''
+    else:
+        return f'''
+        <h1>The Champion Predictor</h1>
+        which team you want to ask about?
+        <form method="post">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response">
+        </form>
+        <br>
+        <a href="{url_for('index')}">BACK</a>
+        '''
+        
+        
 @app.route('/gptdemo', methods=['GET', 'POST'])
 def gptdemo():
     ''' handle a get request by sending a form 
