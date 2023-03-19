@@ -18,6 +18,7 @@ On Windows:
 % $env:APIKEY="....." # in powershell
 % python gptwebapp.py
 '''
+import openai
 from flask import request,redirect,url_for,Flask
 from gpt import GPT
 import os
@@ -86,6 +87,15 @@ def team():
     For this GPT app, I built a query page about travel plan. When people travel, they always worry about local attractions and food. <br>
     If you can make a strategy before traveling, you can save a lot of time and improve the quality of travel.
     </p>
+    <h2>Xiangchi Yuan</h2>
+    <p>
+    Hi, I am Xiangchi Yuan, Currently a 1st year computer science master student. <br>
+    especially, I'm interested in deep learning, and now I'm working on GNN problems like GNN robustness and training
+    acceleration.
+    <br>
+    For this GPT app, I built a query page that help people know the content of a movie. People may want to know the 
+    main content of the movie but without watching it, so this app solve this problem.
+    </p>
     
     
     <a href="{url_for('about')}">BACK</a>
@@ -103,8 +113,8 @@ def index():
     <br>
     <a href="{url_for('ting_form')}">Ting Xu's Travel Helper</a>
     <br>
+    <a href="{url_for('yuan_form')}">Xiangchi Yuan's Movie Introducer</a>
     <br>
-    <a href="{url_for('about')}">BACK</a>
 
     '''
 # the following code creates Ge Gao's form page
@@ -197,8 +207,10 @@ def ting_form():
         <br>
         <a href="{url_for('index')}">BACK</a>
         '''
-        
-        
+
+
+
+
 @app.route('/gptdemo', methods=['GET', 'POST'])
 def gptdemo():
     ''' handle a get request by sending a form 
@@ -226,7 +238,42 @@ def gptdemo():
             <p><input type=submit value="get response">
         </form>
         '''
+# this is Xiangchi Yuan's form
+@app.route('/yuan_form', methods=['GET', 'POST'])
+def yuan_form():
+    if request.method=='POST':
+        prompt = request.form['prompt']
+        answer = gptAPI.movie_introducer(prompt)
+        return f'''
+        <h1>Movie Seeker</h1>
+        <h2>Wanna know what's the content of the movie? <br>
+        Try this Movie introducer! it can help you by introducing main story of the movie! <br>
+        Use it by entering the movie name!
+        </h2>
+        <pre style="bgcolor:yellow">{prompt}</pre>
+        <hr>
+        Here is the answer in text mode:
+        <div style="border:thin solid black">{answer}</div>
+        Here is the answer in "pre" mode:
+        <pre style="border:thin solid black">{answer}</pre>
+        <a href={url_for('yuan_form')}> Try another movie</a>
+        <br>
+        <a href="{url_for('index')}">BACK</a>
+        '''
+    else:
+        return f'''
+        <h1>The Movie Introducer</h1>
+        which movie's content do you want to know?
+        <form method="post">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response">
+        </form>
+        <br>
+        <a href="{url_for('index')}">BACK</a>
+        '''
+
 
 if __name__=='__main__':
+    print(os.environ.get('APIKEY'))
     # run the code on port 5001, MacOS uses port 5000 for its own service :(
     app.run(debug=True,port=5001)

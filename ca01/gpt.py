@@ -62,6 +62,15 @@ class GPT():
         res=self.getResponse(prompt+foodName)
         print(res)
         return res
+
+    '''
+    this method tell you what's the content of 
+    '''
+    def movie_introducer(self, movieName):
+        prompt = "Tell me what's the content of this movie."
+        res = self.getResponse(prompt+movieName)
+        print(res)
+        return res
     
 
 if __name__=='__main__':
