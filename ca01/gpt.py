@@ -63,6 +63,13 @@ class GPT():
         print(res)
         return res
     
+    ''' ask GPT about the destination's popular tourist attraction and local foods '''
+    def travel_helper(self,destination):
+        prompt="Help me find the top10 famous scenic spots and popular restaurants in the following places, and express them in lists."
+        res=self.getResponse(prompt+destination)
+        print(res)
+        return res
+    
 
 if __name__=='__main__':
     '''

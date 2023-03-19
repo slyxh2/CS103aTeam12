@@ -37,7 +37,7 @@ def about():
     print('processing / or /homeroute')
     return f'''
     <h1> About Our Program </h1>
-    <p>this program is a chatGPT webapp on which you can experience <br>
+    <p>This program is a chatGPT webapp on which you can experience <br>
        the AI-powered searchmachine with some specific prompts designed <br>
        by our tech team.</p>
     <a href="{url_for('team')}">Team</a>
@@ -168,18 +168,15 @@ def huang_form():
 @app.route("/ting_form",methods=['GET', 'POST'])
 def ting_form():
     if request.method=='POST':
-        teamName=request.form['prompt']
-        answer=gptAPI.sport_analyst(teamName)
+        prompt=request.form['prompt']
+        answer=gptAPI.travel_helper(prompt)
         return f'''
         <h1>Your Travel Helper</h1>
-        <h2>Are you tired of looking for popular spots when you are planning your travels? Are you having trouble finding local delicacies? <br>
-        Now, this Travel Helper can help you solve your troubles! <br>
-        As long as you enter everything about travel plans, it can answer you!
-        </h2>
-        <pre style="bgcolor:yellow">{teamName}</pre>
+        <pre style="bgcolor:yellow">{prompt}</pre>
         <hr>
         Here is the answer in text mode:
         <div style="border:thin solid black">{answer}</div>
+        <br>
         Here is the answer in "pre" mode:
         <pre style="border:thin solid black">{answer}</pre>
         <a href={url_for('ting_form')}> Ask something else! </a>
@@ -188,8 +185,12 @@ def ting_form():
         '''
     else:
         return f'''
-        <h1>The Champion Predictor</h1>
-        which team you want to ask about?
+        <h1>Your Travel Helper</h1>
+        <p>Are you tired of looking for popular spots when you are planning your travels? Are you having trouble finding local delicacies? <br>
+        Now, this Travel Helper can help you solve your troubles! <br>
+        As long as you enter the destination, it can answer you!
+        </p>
+        Please enter the destination you want to visit?
         <form method="post">
             <textarea name="prompt"></textarea>
             <p><input type=submit value="get response">
