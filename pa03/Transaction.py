@@ -21,17 +21,17 @@ def toDict(t):
     return transactions
 
 class Transaction():
-    def __init__(self):
+    def __init__(self, dbName):
+        self.dbName = dbName;
         self.runQuery('''CREATE TABLE IF NOT EXISTS transactions
-                    (item # INTEGER PRIMARY KEY,
-                    amount INTEGER,
-                    category TEXT,
+                    (amount int,
+                    category text,
                     date DATE,
-                    description TEXT)''',())
+                    description text)''',())
 
     def selectAll(self):
         ''' return all of the transactions as a list of dicts.'''
-        return self.runQuery("SELECT rowid,* from todo",())
+        return self.runQuery("SELECT rowid,* from transactions",())
 
     def selectCompleted(self):
         ''' return all of the completed tasks as a list of dicts.'''
@@ -39,7 +39,7 @@ class Transaction():
 
     def add(self,item):
         ''' create a todo item and add it to the todo table '''
-        return self.runQuery("INSERT INTO todo VALUES(?,?,?)",(item['title'],item['desc'],item['completed']))
+        return self.runQuery("INSERT INTO transactions VALUES(?,?,?,?)",(item['amount'],item['category'],item['date'], item['description']))
 
     def delete(self,rowid):
         ''' delete a todo item '''
@@ -51,7 +51,7 @@ class Transaction():
 
     def runQuery(self,query,tuple):
         ''' return all of the transaction as a list of dicts.'''
-        con= sqlite3.connect(os.getenv('HOME')+'/transaction.db')
+        con= sqlite3.connect(os.getenv('HOME')+'/'+self.dbName)
         cur = con.cursor() 
         cur.execute(query,tuple)
         tuples = cur.fetchall()
