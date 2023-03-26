@@ -12,38 +12,35 @@ from datetime import datetime
 def print_usage():
     ''' print an explanation of how to use this command '''
     print('''usage:
-            transaction quit
-            transaction showcategories
-            transaction add name
-            transaction modify item_id name
-            todo complete item_id
-            todo delete item_id
+            quit
+            showcategories
+            add amount category description
+            modify item_id name
+            show
+            delete item_id
+           
             '''
             )
 
-def print_todos(todos):
-    ''' print the todo items '''
-    if len(todos)==0:
+def print_transactions(transaction):
+    ''' print the items '''
+    if len(transaction)==0:
         print('no tasks to print')
         return
     print('\n')
-    print("%-10s %-10s %-10s %-10s %-20s"%('item #','amount','category','date', 'description'))
+    print("%-10s %-10s %-10s %-10s %-20s"%('item_id','amount','category','date', 'description'))
     print('-'*60)
-    for item in todos:
+    for item in transaction:
         values = tuple(item.values()) #(rowid,title,desc,completed)
         print("%-10s %-10s %-10s %10s %-20s"%values)
 
 def process_args(arglist):
     ''' examine args and make appropriate calls to TodoList'''
-    todolist = Transaction('trans.db')
+    transaction = Transaction('trans.db')
     if arglist==[]:
         print_usage()
     elif arglist[0]=="show":
-        print_todos(todolist.selectAll())
-    elif arglist[0]=="showall":
-        print_todos(todos = todolist.selectAll())
-    elif arglist[0]=="showcomplete":
-        print_todos(todolist.selectCompleted())
+        print_transactions(transaction.show_transactions())
     elif arglist[0]=='add':
         print(arglist)
         if len(arglist)!=4:
@@ -52,19 +49,15 @@ def process_args(arglist):
             current_year = datetime.now().year
             current_month = datetime.now().month
             current_day = datetime.now().day
-            todo = {'amount':arglist[1],'category':arglist[2],'description':arglist[3], 'date':sqlite3.Date(current_year, current_month, current_day)}
-            print(todo);
-            todolist.add(todo)
-    elif arglist[0]=='complete':
-        if len(arglist)!= 2:
-            print_usage()
-        else:
-            todolist.setComplete(arglist[1])
+            item = {'amount':int(arglist[1]),'category':arglist[2],'date':sqlite3.Date(current_year, current_month, current_day),'description':arglist[3] }
+            print(item)
+            transaction.add_transaction(item)
+  
     elif arglist[0]=='delete':
         if len(arglist)!= 2:
             print_usage()
         else:
-            todolist.delete(arglist[1])
+            transaction.delete(arglist[1])
     else:
         print(arglist,"is not implemented")
         print_usage()

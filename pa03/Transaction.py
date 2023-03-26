@@ -13,11 +13,10 @@ This app will store the data in a SQLite database ~/transactions.db
 '''
 import sqlite3
 import os
-from datetime import date
 def toDict(t):
-    ''' t is a tuple (item #, amount, category, date, description)'''
+    ''' t is a tuple (item_id, amount, category, date, description)'''
     print('t='+str(t))
-    transactions = {'item #':t[0], 'amount':t[1], 'category':t[2], 'date':t[3], 'description': t[4]}
+    transactions = {'item_id':t[0], 'amount':t[1], 'category':t[2], 'date':t[3], 'description': t[4]}
     return transactions
 
 class Transaction():
@@ -25,19 +24,13 @@ class Transaction():
         self.dbName = dbName;
         self.runQuery('''CREATE TABLE IF NOT EXISTS transactions
                     (
-                    item_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                    amount int,
-                    category text,
+                    item_id INTEGER  PRIMARY KEY AUTOINCREMENT,
+                    amount INT,
+                    category TEXT,
                     date DATE,
-                    description text)''',())
+                    description TEXT)''',())
 
-    def selectAll(self):
-        ''' return all of the transactions as a list of dicts.'''
-        return self.runQuery("SELECT rowid,* from transactions",())
-
-    def selectCompleted(self):
-        ''' return all of the completed tasks as a list of dicts.'''
-        return self.runQuery("SELECT rowid,* from todo where completed=1",())
+  
 
     def show_transactions(self):
         # return all the transactions
@@ -45,15 +38,12 @@ class Transaction():
 
     def add_transaction(self,item):
         # add one transaction based on the input and today's date
-        return self.runQuery("INSERT INTO transactions VALUES(?,?,?,?)",(item['amount'],item['category'],date.today(), item['description']))
+        return self.runQuery("INSERT INTO transactions (amount, category, date, description) VALUES(?,?,?,?)",(item['amount'],item['category'],item['date'], item['description']))
 
     def delete(self,item_id):
         #delete a transaction item ›
-        return self.runQuery("DELETE FROM transaction WHERE item_id=(?)",(item_id,))
+        return self.runQuery("DELETE FROM transactions WHERE item_id=(?)",(item_id))
 
-    def setComplete(self,rowid):
-        ''' mark a todo item as completed '''
-        return self.runQuery("UPDATE todo SET completed=1 WHERE rowid=(?)",(rowid,))
 
     def runQuery(self,query,tuple):
         ''' return all of the transaction as a list of dicts.'''
