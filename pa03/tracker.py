@@ -65,6 +65,23 @@ def process_args(arglist):
             print_usage()
         else:
             todolist.delete(arglist[1])
+    elif arglist[0]=='findyear':
+        if len(arglist)!= 2:
+            print_usage()
+        else:
+            print_todos(todolist.selectYear(arglist[1]))
+    elif arglist[0]=='findmonth':
+        if len(arglist)!= 2:
+            print_usage()
+        else:
+            month = str(arglist[1]).zfill(2)
+            print_todos(todolist.selectMonth(month))   
+    elif arglist[0]=='finddate':
+        if len(arglist)!= 2:
+            print_usage()
+        else:
+            date = str(arglist[1]).zfill(2)
+            print_todos(todolist.selectDate(date))      
     else:
         print(arglist,"is not implemented")
         print_usage()

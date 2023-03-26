@@ -48,6 +48,22 @@ class Transaction():
     def setComplete(self,rowid):
         ''' mark a todo item as completed '''
         return self.runQuery("UPDATE todo SET completed=1 WHERE rowid=(?)",(rowid,))
+    
+    def selectYear(self, year):
+        ''' Xueyan Huang '''
+        ''' select all transaction in terms of date '''
+        return self.runQuery("SELECT rowid,* FROM transactions WHERE strftime('%Y', date) = (?)", (year,))
+    
+    def selectMonth(self, month):
+        ''' Xueyan Huang '''
+        ''' select all transaction in terms of date '''
+        return self.runQuery("SELECT rowid,* FROM transactions WHERE strftime('%m', date) = (?)", (month,))
+    
+    def selectDate(self, date):
+        ''' Xueyan Huang '''
+        ''' select all transaction in terms of date '''
+        return self.runQuery("SELECT rowid,* FROM transactions WHERE strftime('%d', date) = (?)", (date,))
+
 
     def runQuery(self,query,tuple):
         ''' return all of the transaction as a list of dicts.'''
