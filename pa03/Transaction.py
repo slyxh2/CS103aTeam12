@@ -24,7 +24,9 @@ class Transaction():
     def __init__(self, dbName):
         self.dbName = dbName;
         self.runQuery('''CREATE TABLE IF NOT EXISTS transactions
-                    (amount int,
+                    (
+                    item_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                    amount int,
                     category text,
                     date DATE,
                     description text)''',())
