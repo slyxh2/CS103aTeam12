@@ -18,7 +18,9 @@ def print_usage():
             modify item_id name
             show
             delete item_id
-           
+            findyear year
+            findmonth month
+            finddate date
             '''
             )
 def print_todos(todos):
