@@ -10,10 +10,13 @@ def print_usage():
     print('''usage:
             quit
             showcategories
+            addcategories
+            modifycategories
             add amount category description
             modify item_id name
             showall
             show item_id
+            deleteall
             delete item_id
             findyear year
             findmonth month
@@ -48,6 +51,24 @@ def process_args(arglist):
             print_usage()
         else:
             print_transactions(transaction.show_one(arglist[1]))
+        
+    elif arglist[0]=="showcategories":
+            print(transaction.show_categories())
+    
+    elif arglist[0]=="addcategories":
+        print(arglist)
+        if len(arglist)!=2:
+            print_usage()
+        else:
+            print(transaction.add_categories(arglist[1]))
+    
+    elif arglist[0]=="modifycategories":
+        print(arglist)
+        if len(arglist)!=2:
+            print_usage()
+        else:
+            print(transaction.modify_categories(arglist[1], arglist[2]))
+    
     elif arglist[0]=='add':
         print(arglist)
         if len(arglist)!=4:
@@ -63,6 +84,9 @@ def process_args(arglist):
                 'description': arglist[3]
             }
             transaction.add_transaction(item)
+
+    elif arglist[0]=="deleteall":
+        transaction.delete_all()
     elif arglist[0]=='delete':
         if len(arglist)!=2:
             print_usage()
