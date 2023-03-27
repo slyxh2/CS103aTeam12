@@ -54,6 +54,13 @@ def process_args(arglist):
             item = {'amount':int(arglist[1]),'category':arglist[2],'date':sqlite3.Date(current_year, current_month, current_day),'description':arglist[3] }
             print(item)
             transaction.add_transaction(item)
+
+    elif arglist[0]=='delete':
+        if len(arglist)!=2:
+            print_usage()
+        else:
+            transaction.delete(arglist[1])
+
     elif arglist[0]=='findyear':
         if len(arglist)!= 2:
             print_usage()
