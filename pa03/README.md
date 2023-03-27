@@ -50,3 +50,25 @@ test_transaction.py::test_show_categories PASSED                                
 test_transaction.py::test_modify_category PASSED                                                                                                              [100%]
 
 ======================================================================== 10 passed in 0.03s =========================================================================
+
+# Tracker.py
+
+tingxu@Tings-MacBook-Pro pa03 % python3 tracker.py
+usage:
+            quit
+            showcategories
+            addcategories
+            modifycategories
+            add amount category description
+            modify item_id name
+            showall
+            show item_id
+            deleteall
+            delete item_id
+            findyear year
+            findmonth month
+            findday day
+            findcategory category
+            printmenu
+            
+command> 
