@@ -23,17 +23,6 @@ def print_usage():
             finddate date
             '''
             )
-def print_todos(todos):
-    ''' print the todo items '''
-    if len(todos)==0:
-        print('no tasks to print')
-        return
-    print('\n')
-    print("%-10s %-10s %-10s %-10s %-20s"%('item #','amount','category','date', 'description'))
-    print('-'*60)
-    for item in todos:
-        values = tuple(item.values()) #(rowid,title,desc,completed)
-        print("%-10s %-10s %-10s %10s %-20s"%values)
 
 def print_transactions(transaction):
     ''' print the items '''
@@ -49,7 +38,7 @@ def print_transactions(transaction):
 
 def process_args(arglist):
     ''' examine args and make appropriate calls to TodoList'''
-    transaction = Transaction('trans.db')
+    transaction = Transaction('transsss.db')
     if arglist==[]:
         print_usage()
     elif arglist[0]=="show":
@@ -69,19 +58,19 @@ def process_args(arglist):
         if len(arglist)!= 2:
             print_usage()
         else:
-            print_todos(transaction.selectYear(arglist[1]))
+            print_transactions(transaction.selectYear(arglist[1]))
     elif arglist[0]=='findmonth':
         if len(arglist)!= 2:
             print_usage()
         else:
             month = str(arglist[1]).zfill(2)
-            print_todos(transaction.selectMonth(month))   
+            print_transactions(transaction.selectMonth(month))   
     elif arglist[0]=='finddate':
         if len(arglist)!= 2:
             print_usage()
         else:
             date = str(arglist[1]).zfill(2)
-            print_todos(transaction.selectDate(date))      
+            print_transactions(transaction.selectDate(date))      
     else:
         print(arglist,"is not implemented")
         print_usage()
