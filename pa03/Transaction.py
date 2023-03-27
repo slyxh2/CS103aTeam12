@@ -13,15 +13,22 @@ This app will store the data in a SQLite database ~/transactions.db
 '''
 import sqlite3
 import os
-def toDict(t):
+def to_dict(item):
     ''' t is a tuple (item_id, amount, category, date, description)'''
-    print('t='+str(t))
-    transactions = {'item_id':t[0], 'amount':t[1], 'category':t[2], 'date':t[3], 'description': t[4]}
+    print('t='+str(item))
+    transactions = {
+        'item_id': item[0],
+        'amount': item[1],
+        'category': item[2],
+        'date': item[3],
+        'description': item[4]
+    }
     return transactions
 
-class Transaction():
-    def __init__(self, dbName):
-        self.dbName = dbName;
+class Transaction:
+    ''' Transaction class '''
+    def __init__(self, db_name):
+        self.db_name = db_name
         self.runQuery('''CREATE TABLE IF NOT EXISTS transactions
                     (
                     item_id INTEGER  PRIMARY KEY AUTOINCREMENT,
@@ -29,70 +36,73 @@ class Transaction():
                     category TEXT,
                     date DATE,
                     description TEXT)''',())
-        
-        
+
     def show_categories(self):
-        #return all the categories
+        ''' return all the categories '''
         return self.runQuery("SELECT DISTINCT category FROM transactions",())
-    
+
     def add_categories(self,item):
-        #add a new category
-        return self.runQuery("INSERT INTO transactions (amount, category, date, description) VALUES(?,?,?,?)",(item[None],item['category'],item[None], item[None]))
-    
+        ''' add a new category '''
+        return self.runQuery(
+            "INSERT INTO transactions (amount, category, date, description) VALUES(?,?,?,?)",
+            (item[None], item['category'], item[None], item[None])
+        )
     def modify_categories(self, old_category, new_category):
-        #replace a existed category by a new category
-        return self.runQuery("UPDATE transactions SET category=(?) WHERE category=(?);",(old_category, new_category))
- 
+        ''' replace a existed category by a new category '''
+        return self.runQuery(
+            "UPDATE transactions SET category=(?) WHERE category=(?);",
+            (old_category, new_category)
+        )
+
     def show_all(self):
-        # return all the transactions
+        ''' return all the transactions '''
         return self.runQuery("SELECT * FROM transactions",())
 
     def show_one(self,item_id):
-        # return just one designated transaction 
+        ''' return just one designated transaction '''
         return self.runQuery("SELECT * FROM transactions WHERE item_id=(?)",(item_id))
 
     def add_transaction(self,item):
-        # add one transaction based on the input and today's date
-        print(item['amount']);
-        return self.runQuery("INSERT INTO transactions (amount, category, date, description) VALUES(?,?,?,?)",(item['amount'],item['category'],item['date'], item['description']))
+        ''' add one transaction based on the input and today's date '''
+        print(item['amount'])
+        return self.runQuery(
+            "INSERT INTO transactions (amount, category, date, description) VALUES(?,?,?,?)",
+            (item['amount'],item['category'],item['date'], item['description'])
+        )
 
     def delete(self,item_id):
-        #delete a transaction item ›
+        ''' delete a transaction item '''
         return self.runQuery("DELETE FROM transactions WHERE item_id=(?)",(item_id))
 
-    def setComplete(self,rowid):
-        ''' mark a todo item as completed '''
-        return self.runQuery("UPDATE todo SET completed=1 WHERE rowid=(?)",(rowid,))
-    
-    def selectYear(self, year):
-        ''' Xueyan Huang '''
-        ''' select all transaction in terms of date '''
+    def select_year(self, year):
+        ''' Xueyan Huang
+        select all transaction in terms of year '''
         return self.runQuery("SELECT * FROM transactions WHERE strftime('%Y', date) = (?)", (year,))
-    
-    def selectMonth(self, month):
-        ''' Xueyan Huang '''
-        ''' select all transaction in terms of date '''
-        return self.runQuery("SELECT * FROM transactions WHERE strftime('%m', date) = (?)", (month,))
-    
-    def selectDate(self, date):
-        ''' Xueyan Huang '''
-        ''' select all transaction in terms of date '''
+
+    def select_month(self, month):
+        ''' Xueyan Huang
+        select all transaction in terms of mouth '''
+        return self.runQuery(
+            "SELECT * FROM transactions WHERE strftime('%m', date) = (?)",
+            (month,)
+        )
+
+    def select_date(self, date):
+        ''' Xueyan Huang
+        select all transaction in terms of date '''
         return self.runQuery("SELECT * FROM transactions WHERE strftime('%d', date) = (?)", (date,))
 
     def select_category(self,category):
-        ''' Xiangchi Yuan '''
-        ''' select all transaction in terms of transactions '''
+        ''' Xiangchi Yuan
+        select all transaction in terms of transactions '''
         return self.runQuery("SELECT * FROM transactions WHERE category = (?)", (category,))
 
-    def runQuery(self,query,tuple):
+    def runQuery(self,query,item_tuple):
         ''' return all of the transaction as a list of dicts.'''
-        con= sqlite3.connect(os.getenv('HOME')+'/'+self.dbName)
-        cur = con.cursor() 
-        cur.execute(query,tuple)
+        con= sqlite3.connect(os.getenv('HOME')+'/'+self.db_name)
+        cur = con.cursor()
+        cur.execute(query,item_tuple)
         tuples = cur.fetchall()
         con.commit()
         con.close()
-        return [toDict(t) for t in tuples]
-
-    
-        
+        return [to_dict(t) for t in tuples]
