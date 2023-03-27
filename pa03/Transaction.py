@@ -82,7 +82,7 @@ class Transaction():
     def select_category(self,category):
         ''' Xiangchi Yuan '''
         ''' select all transaction in terms of transactions '''
-        return self.runQuery("SELECT rowid,* FROM transactions WHERE category = (?)", (category,))
+        return self.runQuery("SELECT * FROM transactions WHERE category = (?)", (category,))
 
     def runQuery(self,query,tuple):
         ''' return all of the transaction as a list of dicts.'''
