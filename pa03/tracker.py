@@ -20,6 +20,7 @@ def print_usage():
             modify item_id name
             showall
             show item_id
+            deleteall
             delete item_id
             findyear year
             findmonth month
@@ -97,6 +98,8 @@ def process_args(arglist):
             print(item)
             transaction.add_transaction(item)
 
+    elif arglist[0]=="deleteall":
+        transaction.delete_all()
     elif arglist[0]=='delete':
         if len(arglist)!=2:
             print_usage()

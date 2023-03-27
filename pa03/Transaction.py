@@ -47,22 +47,27 @@ class Transaction():
         return self.runQuery("UPDATE transactions SET category=(?) WHERE category=(?);",(old_category, new_category))
  
     def show_all(self):
-        # return all the transactions
+        # return all the transactions Ge Gao
         return self.runQuery("SELECT * FROM transactions",())
 
     def show_one(self,item_id):
-        # return just one designated transaction 
+        # return just one designated transaction Ge Gao
         return self.runQuery("SELECT * FROM transactions WHERE item_id=(?)",(item_id))
 
     def add_transaction(self,item):
-        # add one transaction based on the input and today's date
+        # add one transaction based on the input and today's date Ge Gao
         print(item['amount']);
         return self.runQuery("INSERT INTO transactions (amount, category, date, description) VALUES(?,?,?,?)",(item['amount'],item['category'],item['date'], item['description']))
 
     def delete(self,item_id):
-        #delete a transaction item ›
+        #delete a transaction item Ge Gao
         return self.runQuery("DELETE FROM transactions WHERE item_id=(?)",(item_id))
 
+    def delete_all(self):
+        # return all the transactions Ge Gao
+        self.runQuery("DELETE FROM transactions",())
+        self.runQuery("VACUUM", ())
+        
     def setComplete(self,rowid):
         ''' mark a todo item as completed '''
         return self.runQuery("UPDATE todo SET completed=1 WHERE rowid=(?)",(rowid,))
