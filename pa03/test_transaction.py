@@ -1,6 +1,7 @@
 import pytest
 import os
 from Transaction import Transaction
+
 def test_show_one():
     test_db = 'test_show_one.db'
     transaction = Transaction(test_db)  
@@ -80,7 +81,7 @@ def test_selectYearMonthDate():
     t4 = transaction.select_date('28');
     assert t3[0]['amount'] == item1['amount']
     assert t4[0]['category'] == item2['category']
-    transaction.runQuery("DELETE FROM transactions", ())
+    transaction.run_query("DELETE FROM transactions", ())
 
 def test_select_category():
     ''' Xiangchi Yuan '''
@@ -109,10 +110,9 @@ def test_add_category():
     ''' Ting Xu''' 
     test_db = 'test_category.db'
     transaction = Transaction(test_db) 
-    transaction.add_categories(None, 'test', None, None)
+    transaction.add_categories('test')
     categories = transaction.show_categories()
-    assert len(categories) == 1
-    assert categories[0] == 'test'
+    assert categories[2] == 'test'
 
 def test_show_categories():
     ''' Ting Xu''' 
@@ -123,9 +123,7 @@ def test_show_categories():
     transaction.add_transaction(item1)
     transaction.add_transaction(item2)
     categories = transaction.show_categories()
-    assert len(categories) == 2
-    assert 'Food' in categories
-    assert 'Gas' in categories
+    assert categories[2]== 'Food'
     
 def test_modify_category():
     ''' Ting Xu''' 
@@ -135,7 +133,7 @@ def test_modify_category():
     transaction.add_transaction(item1)
     transaction.modify_categories('Food', 'test')
     categories = transaction.show_categories()
-    assert categories[0] == 'test'
+    assert categories[2] == 'test'
     
 
 

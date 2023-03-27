@@ -3,8 +3,6 @@ Transaction.py is an Object Relational Mapping to the transactions database
 
 The ORM will work map SQL rows with the schema
     (item_id, amount, category, date, description)
-    
-    ######待补充
 
 In place of SQL queries, we will have method calls.
 
@@ -38,19 +36,21 @@ class Transaction:
 
     def show_categories(self):
         ''' return all the categories '''
-        return self.run_query("SELECT DISTINCT category FROM transactions",())
+        temp = self.run_query("SELECT * FROM transactions",())
+        res = [row['category'] for row in temp]
+        return res
 
     def add_categories(self,item):
         ''' add a new category '''
-        return self.run_query(
-            "INSERT INTO transactions (amount, category, date, description) VALUES(?,?,?,?)",
-            (item[None], item['category'], item[None], item[None])
-        )
+        query = 'INSERT INTO transactions (category) VALUES(?)'
+        item_tuple = (item,)
+        return self.run_query(query, item_tuple)
+
     def modify_categories(self, old_category, new_category):
         ''' replace a existed category by a new category '''
         return self.run_query(
             "UPDATE transactions SET category=(?) WHERE category=(?);",
-            (old_category, new_category)
+            (new_category, old_category)
         )
 
     def show_all(self):
