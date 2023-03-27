@@ -5,7 +5,7 @@ Tracker.py
 import sys
 import sqlite3
 from datetime import datetime
-from transaction import Transaction
+from Transaction import Transaction
 
 def print_usage():
     ''' print an explanation of how to use this command '''

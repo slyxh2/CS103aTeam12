@@ -83,6 +83,7 @@ def test_selectYearMonthDate():
     transaction.runQuery("DELETE FROM transactions", ())
 
 def test_select_category():
+    ''' Xiangchi Yuan '''
     test_db = 'test_select_category.db'
     transaction = Transaction(test_db)
     item1 = {
