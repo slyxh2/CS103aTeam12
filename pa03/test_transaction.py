@@ -24,4 +24,16 @@ def test_selectYearMonthDate():
     assert t4[0]['category'] == item2['category']
     transaction.runQuery("DELETE FROM transactions", ())
 
+def test_select_category():
+    test_db = 'test_select_category.db'
+    transaction = Transaction(test_db)
+    item1 = {'amount': 50, 'category': 'Food', 'date': '2023-03-26', 'description': 'Delicious Food'}
+    item2 = {'amount': 100, 'category': 'Gas', 'date': '2023-02-28', 'description': 'Filled up gas tank'}
+    transaction.add_transaction(item1)
+    transaction.add_transaction(item2)
+    transactions = transaction.select_category('Food')
+    assert transactions[0]['amount'] == item1['amount']
+    transactions = transaction.select_category('Gas')
+    assert transactions[1]['amount'] == item2['amount']
+
 
