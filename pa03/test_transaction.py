@@ -1,6 +1,6 @@
 import pytest
 import os
-from transaction import Transaction
+from Transaction import Transaction
 def test_show_one():
     test_db = 'test_show_one.db'
     transaction = Transaction(test_db)  
