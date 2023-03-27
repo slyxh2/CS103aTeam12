@@ -1,6 +1,6 @@
 import pytest
 import os
-from Transaction import Transaction
+from transaction import Transaction
 def test_show_one():
     test_db = 'test_show_one.db'
     transaction = Transaction(test_db)  
@@ -85,8 +85,18 @@ def test_selectYearMonthDate():
 def test_select_category():
     test_db = 'test_select_category.db'
     transaction = Transaction(test_db)
-    item1 = {'amount': 50, 'category': 'Food', 'date': '2023-03-26', 'description': 'Delicious Food'}
-    item2 = {'amount': 100, 'category': 'Gas', 'date': '2023-02-28', 'description': 'Filled up gas tank'}
+    item1 = {
+        'amount': 50, 
+        'category': 'Food', 
+        'date': '2023-03-26',
+        'description': 'Delicious Food'
+        }
+    item2 = {
+        'amount': 100, 
+        'category': 'Gas', 
+        'date': '2023-02-28', 
+        'description': 'Filled up gas tank'
+        }
     transaction.add_transaction(item1)
     transaction.add_transaction(item2)
     transactions = transaction.select_category('Food')

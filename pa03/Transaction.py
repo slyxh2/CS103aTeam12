@@ -15,7 +15,6 @@ import sqlite3
 import os
 def to_dict(item):
     ''' t is a tuple (item_id, amount, category, date, description)'''
-   
     transactions = {
         'item_id': item[0],
         'amount': item[1],
@@ -29,7 +28,7 @@ class Transaction:
     ''' Transaction class '''
     def __init__(self, db_name):
         self.db_name = db_name
-        self.runQuery('''CREATE TABLE IF NOT EXISTS transactions
+        self.run_query('''CREATE TABLE IF NOT EXISTS transactions
                     (
                     item_id INTEGER  PRIMARY KEY AUTOINCREMENT,
                     amount INT,
@@ -39,17 +38,17 @@ class Transaction:
 
     def show_categories(self):
         ''' return all the categories '''
-        return self.runQuery("SELECT DISTINCT category FROM transactions",())
+        return self.run_query("SELECT DISTINCT category FROM transactions",())
 
     def add_categories(self,item):
         ''' add a new category '''
-        return self.runQuery(
+        return self.run_query(
             "INSERT INTO transactions (amount, category, date, description) VALUES(?,?,?,?)",
             (item[None], item['category'], item[None], item[None])
         )
     def modify_categories(self, old_category, new_category):
         ''' replace a existed category by a new category '''
-        return self.runQuery(
+        return self.run_query(
             "UPDATE transactions SET category=(?) WHERE category=(?);",
             (old_category, new_category)
         )
@@ -57,39 +56,39 @@ class Transaction:
     def show_all(self):
         '''Ge Gao
         return all the transactions '''
-        return self.runQuery("SELECT * FROM transactions",())
+        return self.run_query("SELECT * FROM transactions",())
 
     def show_one(self,item_id):
-        # return just one designated transaction Ge Gao
-        return self.runQuery("SELECT * FROM transactions WHERE item_id=(?)",(item_id,))
+        '''return just one designated transaction Ge Gao'''
+        return self.run_query("SELECT * FROM transactions WHERE item_id=(?)",(item_id,))
 
     def add_transaction(self,item):
         '''Ge Gao 
         add one transaction based on the input and today's date '''
         print(item['amount'])
-        return self.runQuery(
+        return self.run_query(
             "INSERT INTO transactions (amount, category, date, description) VALUES(?,?,?,?)",
             (item['amount'],item['category'],item['date'], item['description'])
         )
 
     def delete(self,item_id):
-        #delete a transaction item Ge Gao
-        return self.runQuery("DELETE FROM transactions WHERE item_id=(?)",(item_id,))
+        '''delete a transaction item Ge Gao'''
+        return self.run_query("DELETE FROM transactions WHERE item_id=(?)",(item_id,))
 
     def delete_all(self):
         '''Ge Gao 
         return all the transactions '''
-        self.runQuery("DELETE FROM transactions",())
-        self.runQuery("VACUUM", ())
+        self.run_query("DELETE FROM transactions",())
+        self.run_query("VACUUM", ())
     def select_year(self, year):
         ''' Xueyan Huang
         select all transaction in terms of year '''
-        return self.runQuery("SELECT * FROM transactions WHERE strftime('%Y', date) = (?)", (year,))
+        return self.run_query("SELECT * FROM transactions WHERE strftime('%Y', date) = (?)", (year,))
 
     def select_month(self, month):
         ''' Xueyan Huang
         select all transaction in terms of mouth '''
-        return self.runQuery(
+        return self.run_query(
             "SELECT * FROM transactions WHERE strftime('%m', date) = (?)",
             (month,)
         )
@@ -97,14 +96,14 @@ class Transaction:
     def select_date(self, date):
         ''' Xueyan Huang
         select all transaction in terms of date '''
-        return self.runQuery("SELECT * FROM transactions WHERE strftime('%d', date) = (?)", (date,))
+        return self.run_query("SELECT * FROM transactions WHERE strftime('%d', date) = (?)", (date,))
 
     def select_category(self,category):
         ''' Xiangchi Yuan
         select all transaction in terms of transactions '''
-        return self.runQuery("SELECT * FROM transactions WHERE category = (?)", (category,))
+        return self.run_query("SELECT * FROM transactions WHERE category = (?)", (category,))
 
-    def runQuery(self,query,item_tuple):
+    def run_query(self,query,item_tuple):
         ''' return all of the transaction as a list of dicts.'''
         con= sqlite3.connect(os.getenv('HOME')+'/'+self.db_name)
         cur = con.cursor()

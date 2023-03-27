@@ -5,8 +5,7 @@ Tracker.py
 import sys
 import sqlite3
 from datetime import datetime
-from Transaction import Transaction
-
+from transaction import Transaction
 
 def print_usage():
     ''' print an explanation of how to use this command '''
@@ -40,7 +39,7 @@ def print_transactions(transaction):
     print("%-10s %-10s %-10s %-10s %-20s"%('item_id','amount','category','date', 'description'))
     print('-'*60)
     for item in transaction:
-        values = tuple(item.values()) #(rowid,title,desc,completed)
+        values = tuple(item.values()) 
         print("%-10s %-10s %-10s %10s %-20s"%values)
 
 def process_args(arglist):
