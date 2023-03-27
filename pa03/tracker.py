@@ -12,18 +12,15 @@ from datetime import datetime
 def print_usage():
     ''' print an explanation of how to use this command '''
     print('''usage:
-                quit
-                show categories
-                add category
-                modify category
-                show transactions
-                add transaction
-                delete transaction
-                summarize transactions by date
-                summarize transactions by month
-                summarize transactions by year
-                summarize transactions by category
-                print this menu
+            quit
+            showcategories
+            add amount category description
+            modify item_id name
+            show
+            delete item_id
+            findyear year
+            findmonth month
+            finddate date
             '''
             )
 
