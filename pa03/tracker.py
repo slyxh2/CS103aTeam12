@@ -12,26 +12,20 @@ from datetime import datetime
 def print_usage():
     ''' print an explanation of how to use this command '''
     print('''usage:
-            quit
-            showcategories
-            add amount category description
-            modify item_id name
-            show
-            delete item_id
-           
+                quit
+                show categories
+                add category
+                modify category
+                show transactions
+                add transaction
+                delete transaction
+                summarize transactions by date
+                summarize transactions by month
+                summarize transactions by year
+                summarize transactions by category
+                print this menu
             '''
             )
-def print_todos(todos):
-    ''' print the todo items '''
-    if len(todos)==0:
-        print('no tasks to print')
-        return
-    print('\n')
-    print("%-10s %-10s %-10s %-10s %-20s"%('item #','amount','category','date', 'description'))
-    print('-'*60)
-    for item in todos:
-        values = tuple(item.values()) #(rowid,title,desc,completed)
-        print("%-10s %-10s %-10s %10s %-20s"%values)
 
 def print_transactions(transaction):
     ''' print the items '''
@@ -42,11 +36,11 @@ def print_transactions(transaction):
     print("%-10s %-10s %-10s %-10s %-20s"%('item_id','amount','category','date', 'description'))
     print('-'*60)
     for item in transaction:
-        values = tuple(item.values()) #(rowid,title,desc,completed)
+        values = tuple(item.values()) #(item_id, amount, category, date, description)
         print("%-10s %-10s %-10s %10s %-20s"%values)
 
 def process_args(arglist):
-    ''' examine args and make appropriate calls to TodoList'''
+    ''' examine args and make appropriate calls to transaction'''
     transaction = Transaction('trans.db')
     if arglist==[]:
         print_usage()
