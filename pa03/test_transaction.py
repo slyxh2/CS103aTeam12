@@ -38,6 +38,7 @@ def test_select_category():
     assert transactions[1]['amount'] == item2['amount']
 
 def test_add_category():
+    ''' Ting Xu''' 
     test_db = 'test_category.db'
     transaction = Transaction(test_db) 
     transaction.add_categories(None, 'test', None, None)
@@ -46,6 +47,7 @@ def test_add_category():
     assert categories[0] == 'test'
 
 def test_show_categories():
+    ''' Ting Xu''' 
     test_db = 'test_show_category.db'
     transaction = Transaction(test_db) 
     item1 = {'amount': 50, 'category': 'Food', 'date': '2023-03-26', 'description': 'Delicious Food'}
@@ -58,6 +60,7 @@ def test_show_categories():
     assert 'Gas' in categories
     
 def test_modify_category():
+    ''' Ting Xu''' 
     test_db = 'test_modify_category.db'
     transaction = Transaction(test_db) 
     item1 = {'amount': 50, 'category': 'Food', 'date': '2023-03-26', 'description': 'Delicious Food'}
