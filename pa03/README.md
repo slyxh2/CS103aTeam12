@@ -38,16 +38,16 @@ rootdir: /Users/tingxu/Documents/courses/103a Fundamentals of Software Engineeri
 plugins: anyio-3.6.2
 collected 10 items                                                                                                                                                  
 
-test_transaction.py::test_show_one PASSED                                                                                                                     [ 10%]
-test_transaction.py::test_show_all PASSED                                                                                                                     [ 20%]
-test_transaction.py::test_add_transaction PASSED                                                                                                              [ 30%]
-test_transaction.py::test_delete PASSED                                                                                                                       [ 40%]
-test_transaction.py::test_delete_all PASSED                                                                                                                   [ 50%]
-test_transaction.py::test_selectYearMonthDate PASSED                                                                                                          [ 60%]
-test_transaction.py::test_select_category PASSED                                                                                                              [ 70%]
-test_transaction.py::test_add_category PASSED                                                                                                                 [ 80%]
-test_transaction.py::test_show_categories PASSED                                                                                                              [ 90%]
-test_transaction.py::test_modify_category PASSED                                                                                                              [100%]
++ test_transaction.py::test_show_one PASSED                                                                                                                     [ 10%]
++ test_transaction.py::test_show_all PASSED                                                                                                                     [ 20%]
++ test_transaction.py::test_add_transaction PASSED                                                                                                              [ 30%]
++ test_transaction.py::test_delete PASSED                                                                                                                       [ 40%]
++ test_transaction.py::test_delete_all PASSED                                                                                                                   [ 50%]
++ test_transaction.py::test_selectYearMonthDate PASSED                                                                                                          [ 60%]
++ test_transaction.py::test_select_category PASSED                                                                                                              [ 70%]
++ test_transaction.py::test_add_category PASSED                                                                                                                 [ 80%]
++ test_transaction.py::test_show_categories PASSED                                                                                                              [ 90%]
++ test_transaction.py::test_modify_category PASSED                                                                                                              [100%]
 
 ======================================================================== 10 passed in 0.03s =========================================================================
 
@@ -55,20 +55,20 @@ test_transaction.py::test_modify_category PASSED                                
 
 tingxu@Tings-MacBook-Pro pa03 % python3 tracker.py
 usage:
-            quit
-            showcategories
-            addcategories
-            modifycategories
-            add amount category description
-            modify item_id name
-            showall
-            show item_id
-            deleteall
-            delete item_id
-            findyear year
-            findmonth month
-            findday day
-            findcategory category
-            printmenu
++ quit
++ showcategories
++ addcategories
++ modifycategories
++ add amount category description
++ modify item_id name
++ showall
++ show item_id
++ deleteall
++ delete item_id
++ indyear year
++ findmonth month
++ findday day
++ findcategory category
++ printmenu
             
 command> 
