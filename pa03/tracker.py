@@ -16,7 +16,8 @@ def print_usage():
             showcategories
             add amount category description
             modify item_id name
-            show
+            showall
+            show item_id
             delete item_id
             findyear year
             findmonth month
@@ -41,8 +42,15 @@ def process_args(arglist):
     transaction = Transaction('trans.db')
     if arglist==[]:
         print_usage()
+    elif arglist[0]=="showall":
+        print_transactions(transaction.show_all())
     elif arglist[0]=="show":
-        print_transactions(transaction.show_transactions())
+        if len(arglist)!=2:
+            print_usage()
+        else:
+            print_transactions(transaction.show_one(arglist[1]))
+        
+        
     elif arglist[0]=='add':
         print(arglist)
         if len(arglist)!=4:

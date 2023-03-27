@@ -43,9 +43,13 @@ class Transaction():
         #replace a existed category by a new category
         return self.runQuery("UPDATE transactions SET category=(?) WHERE category=(?);",(old_category, new_category))
  
-    def show_transactions(self):
+    def show_all(self):
         # return all the transactions
         return self.runQuery("SELECT * FROM transactions",())
+
+    def show_one(self,item_id):
+        # return just one designated transaction 
+        return self.runQuery("SELECT * FROM transactions WHERE item_id=(?)",(item_id))
 
     def add_transaction(self,item):
         # add one transaction based on the input and today's date
