@@ -80,7 +80,7 @@ def test_selectYearMonthDate():
     t4 = transaction.select_date('28');
     assert t3[0]['amount'] == item1['amount']
     assert t4[0]['category'] == item2['category']
-    transaction.runQuery("DELETE FROM transactions", ())
+    transaction.run_query("DELETE FROM transactions", ())
 
 def test_select_category():
     ''' Xiangchi Yuan '''
