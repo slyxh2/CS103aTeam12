@@ -15,7 +15,7 @@ import sqlite3
 import os
 def to_dict(item):
     ''' t is a tuple (item_id, amount, category, date, description)'''
-    print('t='+str(item))
+   
     transactions = {
         'item_id': item[0],
         'amount': item[1],
@@ -61,7 +61,7 @@ class Transaction:
 
     def show_one(self,item_id):
         # return just one designated transaction Ge Gao
-        return self.runQuery("SELECT * FROM transactions WHERE item_id=(?)",(item_id))
+        return self.runQuery("SELECT * FROM transactions WHERE item_id=(?)",(item_id,))
 
     def add_transaction(self,item):
         '''Ge Gao 
@@ -74,7 +74,7 @@ class Transaction:
 
     def delete(self,item_id):
         #delete a transaction item Ge Gao
-        return self.runQuery("DELETE FROM transactions WHERE item_id=(?)",(item_id))
+        return self.runQuery("DELETE FROM transactions WHERE item_id=(?)",(item_id,))
 
     def delete_all(self):
         '''Ge Gao 
