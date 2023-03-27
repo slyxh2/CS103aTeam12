@@ -55,15 +55,18 @@ class Transaction:
         )
 
     def show_all(self):
-        ''' return all the transactions '''
+        '''Ge Gao
+        return all the transactions '''
         return self.runQuery("SELECT * FROM transactions",())
 
     def show_one(self,item_id):
-        ''' return just one designated transaction '''
+        '''Ge Gao
+        return just one designated transaction '''
         return self.runQuery("SELECT * FROM transactions WHERE item_id=(?)",(item_id))
 
     def add_transaction(self,item):
-        ''' add one transaction based on the input and today's date '''
+        '''Ge Gao 
+        add one transaction based on the input and today's date '''
         print(item['amount'])
         return self.runQuery(
             "INSERT INTO transactions (amount, category, date, description) VALUES(?,?,?,?)",
@@ -71,9 +74,14 @@ class Transaction:
         )
 
     def delete(self,item_id):
-        ''' delete a transaction item '''
+        '''Ge Gao 
+        delete a transaction item '''
         return self.runQuery("DELETE FROM transactions WHERE item_id=(?)",(item_id))
-
+    def delete_all(self):
+        '''Ge Gao 
+        return all the transactions '''
+        self.runQuery("DELETE FROM transactions",())
+        self.runQuery("VACUUM", ())
     def select_year(self, year):
         ''' Xueyan Huang
         select all transaction in terms of year '''
