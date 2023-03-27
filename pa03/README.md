@@ -70,5 +70,285 @@ usage:
 + findday day
 + findcategory category
 + printmenu
-            
+
+
+# the transcript
+=========================================================================           
 command> 
+
+gegao@GeGaos-MacBook-Pro pa03 % python3 tracker.py
+usage:
+            quit
+            showcategories
+            addcategories
+            modifycategories
+            add amount category description
+            modify item_id name
+            showall
+            show item_id
+            deleteall
+            delete item_id
+            findyear year
+            findmonth month
+            findday day
+            findcategory category
+            printmenu
+            
+command> add 17 pet snake
+['add', '17', 'pet', 'snake']
+17
+------------------------------------------------------------
+
+
+
+command> showall
+
+
+item_id    amount     category   date       description         
+------------------------------------------------------------
+6          122        food       2023-03-27 bread               
+7          18         food       2023-03-27 lobster             
+8          8          pets       2023-03-27 cat                 
+9          None       appliance        None None                
+10         31         appliance  2023-03-27 fridge              
+11         200        pets       2023-03-27 rat                 
+13         None       shop             None None                
+14         17         pet        2023-03-27 snake               
+------------------------------------------------------------
+
+
+
+command> delete 17
+------------------------------------------------------------
+
+
+
+command> showall
+
+
+item_id    amount     category   date       description         
+------------------------------------------------------------
+6          122        food       2023-03-27 bread               
+7          18         food       2023-03-27 lobster             
+8          8          pets       2023-03-27 cat                 
+9          None       appliance        None None                
+10         31         appliance  2023-03-27 fridge              
+11         200        pets       2023-03-27 rat                 
+13         None       shop             None None                
+14         17         pet        2023-03-27 snake               
+------------------------------------------------------------
+
+
+
+command> delete 14
+------------------------------------------------------------
+
+
+
+command> showall
+
+
+item_id    amount     category   date       description         
+------------------------------------------------------------
+6          122        food       2023-03-27 bread               
+7          18         food       2023-03-27 lobster             
+8          8          pets       2023-03-27 cat                 
+9          None       appliance        None None                
+10         31         appliance  2023-03-27 fridge              
+11         200        pets       2023-03-27 rat                 
+13         None       shop             None None                
+------------------------------------------------------------
+
+
+
+command> show 11
+
+
+item_id    amount     category   date       description         
+------------------------------------------------------------
+11         200        pets       2023-03-27 rat                 
+------------------------------------------------------------
+
+
+
+command> showcategories
+['food', 'food', 'pets', 'appliance', 'appliance', 'pets', 'shop']
+------------------------------------------------------------
+
+
+
+command> addcategories drink
+['addcategories', 'drink']
+[]
+------------------------------------------------------------
+
+
+
+command> showcategories
+['food', 'food', 'pets', 'appliance', 'appliance', 'pets', 'shop', 'drink']
+------------------------------------------------------------
+
+
+
+command> modifycategories shop shops
+['modifycategories', 'shop', 'shops']
+[]
+------------------------------------------------------------
+
+
+
+command> showcategories
+['food', 'food', 'pets', 'appliance', 'appliance', 'pets', 'shops', 'drink']
+------------------------------------------------------------
+
+
+
+command> printmenu
+usage:
+            quit
+            showcategories
+            addcategories
+            modifycategories
+            add amount category description
+            modify item_id name
+            showall
+            show item_id
+            deleteall
+            delete item_id
+            findyear year
+            findmonth month
+            findday day
+            findcategory category
+            printmenu
+            
+------------------------------------------------------------
+
+
+
+command> findcategory pets
+
+
+item_id    amount     category   date       description         
+------------------------------------------------------------
+8          8          pets       2023-03-27 cat                 
+11         200        pets       2023-03-27 rat                 
+------------------------------------------------------------
+
+
+
+command> findday 26
+no tasks to print
+------------------------------------------------------------
+
+
+
+command> showall
+
+
+item_id    amount     category   date       description         
+------------------------------------------------------------
+6          122        food       2023-03-27 bread               
+7          18         food       2023-03-27 lobster             
+8          8          pets       2023-03-27 cat                 
+9          None       appliance        None None                
+10         31         appliance  2023-03-27 fridge              
+11         200        pets       2023-03-27 rat                 
+13         None       shops            None None                
+15         None       drink            None None                
+------------------------------------------------------------
+
+
+
+command> findday 27
+
+
+item_id    amount     category   date       description         
+------------------------------------------------------------
+6          122        food       2023-03-27 bread               
+7          18         food       2023-03-27 lobster             
+8          8          pets       2023-03-27 cat                 
+10         31         appliance  2023-03-27 fridge              
+11         200        pets       2023-03-27 rat                 
+------------------------------------------------------------
+
+
+
+command> findmonth 3
+
+
+item_id    amount     category   date       description         
+------------------------------------------------------------
+6          122        food       2023-03-27 bread               
+7          18         food       2023-03-27 lobster             
+8          8          pets       2023-03-27 cat                 
+10         31         appliance  2023-03-27 fridge              
+11         200        pets       2023-03-27 rat                 
+------------------------------------------------------------
+
+
+
+command> findyear 1998
+no tasks to print
+------------------------------------------------------------
+
+
+
+command> findyear 2023
+
+
+item_id    amount     category   date       description         
+------------------------------------------------------------
+6          122        food       2023-03-27 bread               
+7          18         food       2023-03-27 lobster             
+8          8          pets       2023-03-27 cat                 
+10         31         appliance  2023-03-27 fridge              
+11         200        pets       2023-03-27 rat                 
+------------------------------------------------------------
+
+
+
+command> printmenu 
+usage:
+            quit
+            showcategories
+            addcategories
+            modifycategories
+            add amount category description
+            modify item_id name
+            showall
+            show item_id
+            deleteall
+            delete item_id
+            findyear year
+            findmonth month
+            findday day
+            findcategory category
+            printmenu
+            
+------------------------------------------------------------
+
+
+
+command> findcategory pets
+
+
+item_id    amount     category   date       description         
+------------------------------------------------------------
+8          8          pets       2023-03-27 cat                 
+11         200        pets       2023-03-27 rat                 
+------------------------------------------------------------
+
+
+
+command> deleteall
+------------------------------------------------------------
+
+
+
+command> showall
+no tasks to print
+------------------------------------------------------------
+
+
+
+command> quit

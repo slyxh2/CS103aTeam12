@@ -12,10 +12,9 @@ def print_usage():
     print('''usage:
             quit
             showcategories
-            addcategories
-            modifycategories
+            addcategories category
+            modifycategories oldcategory newcategory
             add amount category description
-            modify item_id name
             showall
             show item_id
             deleteall
@@ -66,7 +65,7 @@ def process_args(arglist):
 
     elif arglist[0]=="modifycategories":
         print(arglist)
-        if len(arglist)!=2:
+        if len(arglist)!=3:
             print_usage()
         else:
             print(transaction.modify_categories(arglist[1], arglist[2]))

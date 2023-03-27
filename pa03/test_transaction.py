@@ -112,7 +112,7 @@ def test_add_category():
     transaction = Transaction(test_db) 
     transaction.add_categories('test')
     categories = transaction.show_categories()
-    assert categories[2] == 'test'
+    assert categories[0] == 'test'
 
 def test_show_categories():
     ''' Ting Xu''' 
