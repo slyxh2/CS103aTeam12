@@ -79,6 +79,10 @@ class Transaction():
         ''' select all transaction in terms of date '''
         return self.runQuery("SELECT * FROM transactions WHERE strftime('%d', date) = (?)", (date,))
 
+    def select_category(self,category):
+        ''' Xiangchi Yuan '''
+        ''' select all transaction in terms of transactions '''
+        return self.runQuery("SELECT rowid,* FROM transactions WHERE category = (?)", (category,))
 
     def runQuery(self,query,tuple):
         ''' return all of the transaction as a list of dicts.'''

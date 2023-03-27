@@ -21,9 +21,25 @@ def print_usage():
             delete item_id
             findyear year
             findmonth month
-            finddate date
+            findday day
+            findcategory category
+            printmenu
             '''
             )
+def print_todos(todos):
+    ''' print the todo items '''
+    if len(todos)==0:
+        print('no tasks to print')
+        return
+    print('\n')
+    print("%-10s %-10s %-10s %-10s %-20s"%('item #','amount','category','date', 'description'))
+    print('-'*60)
+    for item in todos:
+        values = tuple(item.values()) #(rowid,title,desc,completed)
+        print("%-10s %-10s %-10s %10s %-20s"%values)
+
+def quit_db():
+    sys.exit()
 
 def print_transactions(transaction):
     ''' print the items '''
@@ -34,7 +50,7 @@ def print_transactions(transaction):
     print("%-10s %-10s %-10s %-10s %-20s"%('item_id','amount','category','date', 'description'))
     print('-'*60)
     for item in transaction:
-        values = tuple(item.values()) #(item_id, amount, category, date, description)
+        values = tuple(item.values()) #(rowid,title,desc,completed)
         print("%-10s %-10s %-10s %10s %-20s"%values)
 
 def process_args(arglist):
@@ -73,19 +89,29 @@ def process_args(arglist):
         if len(arglist)!= 2:
             print_usage()
         else:
-            print_transactions(transaction.selectYear(arglist[1]))
+            print_todos(transaction.selectYear(arglist[1]))
     elif arglist[0]=='findmonth':
         if len(arglist)!= 2:
             print_usage()
         else:
             month = str(arglist[1]).zfill(2)
-            print_transactions(transaction.selectMonth(month))   
+            print_todos(transaction.selectMonth(month))   
     elif arglist[0]=='finddate':
         if len(arglist)!= 2:
             print_usage()
         else:
             date = str(arglist[1]).zfill(2)
-            print_transactions(transaction.selectDate(date))      
+            print_todos(transaction.selectDate(date))
+    elif arglist[0]=='findcategory':
+        if len(arglist)!= 2:
+            print_usage()
+        else:
+            category = str(arglist[1]).zfill(2)
+            print_todos(transaction.select_category(category))
+    elif arglist[0]=='quit':
+            quit_db()
+    elif arglist[0]=='printmenu':
+            print_usage()
     else:
         print(arglist,"is not implemented")
         print_usage()
