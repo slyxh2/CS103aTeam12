@@ -51,7 +51,7 @@ class Transaction():
 
     def show_one(self,item_id):
         # return just one designated transaction Ge Gao
-        return self.runQuery("SELECT * FROM transactions WHERE item_id=(?)",(item_id))
+        return self.runQuery("SELECT * FROM transactions WHERE item_id=(?)",(item_id,))
 
     def add_transaction(self,item):
         # add one transaction based on the input and today's date Ge Gao
@@ -60,7 +60,7 @@ class Transaction():
 
     def delete(self,item_id):
         #delete a transaction item Ge Gao
-        return self.runQuery("DELETE FROM transactions WHERE item_id=(?)",(item_id))
+        return self.runQuery("DELETE FROM transactions WHERE item_id=(?)",(item_id,))
 
     def delete_all(self):
         # return all the transactions Ge Gao
