@@ -32,15 +32,18 @@ class Transaction():
         
         
     def show_categories(self):
-        #return all the categories
+        ''' Ting Xu''' 
+        ''' return all the categories '''
         return self.runQuery("SELECT DISTINCT category FROM transactions",())
     
     def add_categories(self,item):
-        #add a new category
+        ''' Ting Xu'''
+        ''' add a new category '''
         return self.runQuery("INSERT INTO transactions (amount, category, date, description) VALUES(?,?,?,?)",(item[None],item['category'],item[None], item[None]))
     
     def modify_categories(self, old_category, new_category):
-        #replace a existed category by a new category
+        ''' Ting Xu'''
+        ''' replace a existed category by a new category '''
         return self.runQuery("UPDATE transactions SET category=(?) WHERE category=(?);",(old_category, new_category))
  
     def show_all(self):
