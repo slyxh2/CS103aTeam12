@@ -68,6 +68,3 @@ def test_modify_category():
     transaction.modify_categories('Food', 'test')
     categories = transaction.show_categories()
     assert categories[0] == 'test'
-    
-
-
