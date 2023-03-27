@@ -15,7 +15,7 @@ import sqlite3
 import os
 def toDict(t):
     ''' t is a tuple (item_id, amount, category, date, description)'''
-    # print('t='+str(t))
+    print('t='+str(t))
     transactions = {'item_id':t[0], 'amount':t[1], 'category':t[2], 'date':t[3], 'description': t[4]}
     return transactions
 
@@ -49,6 +49,7 @@ class Transaction():
 
     def add_transaction(self,item):
         # add one transaction based on the input and today's date
+        print(item['amount']);
         return self.runQuery("INSERT INTO transactions (amount, category, date, description) VALUES(?,?,?,?)",(item['amount'],item['category'],item['date'], item['description']))
 
     def delete(self,item_id):
@@ -62,17 +63,17 @@ class Transaction():
     def selectYear(self, year):
         ''' Xueyan Huang '''
         ''' select all transaction in terms of date '''
-        return self.runQuery("SELECT rowid,* FROM transactions WHERE strftime('%Y', date) = (?)", (year,))
+        return self.runQuery("SELECT * FROM transactions WHERE strftime('%Y', date) = (?)", (year,))
     
     def selectMonth(self, month):
         ''' Xueyan Huang '''
         ''' select all transaction in terms of date '''
-        return self.runQuery("SELECT rowid,* FROM transactions WHERE strftime('%m', date) = (?)", (month,))
+        return self.runQuery("SELECT * FROM transactions WHERE strftime('%m', date) = (?)", (month,))
     
     def selectDate(self, date):
         ''' Xueyan Huang '''
         ''' select all transaction in terms of date '''
-        return self.runQuery("SELECT rowid,* FROM transactions WHERE strftime('%d', date) = (?)", (date,))
+        return self.runQuery("SELECT * FROM transactions WHERE strftime('%d', date) = (?)", (date,))
 
 
     def runQuery(self,query,tuple):

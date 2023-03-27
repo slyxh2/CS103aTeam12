@@ -37,7 +37,7 @@ def print_transactions(transaction):
         print("%-10s %-10s %-10s %10s %-20s"%values)
 
 def process_args(arglist):
-    ''' examine args and make appropriate calls to transaction'''
+    ''' examine args and make appropriate calls to TodoList'''
     transaction = Transaction('trans.db')
     if arglist==[]:
         print_usage()
@@ -58,19 +58,19 @@ def process_args(arglist):
         if len(arglist)!= 2:
             print_usage()
         else:
-            print_todos(transaction.selectYear(arglist[1]))
+            print_transactions(transaction.selectYear(arglist[1]))
     elif arglist[0]=='findmonth':
         if len(arglist)!= 2:
             print_usage()
         else:
             month = str(arglist[1]).zfill(2)
-            print_todos(transaction.selectMonth(month))   
+            print_transactions(transaction.selectMonth(month))   
     elif arglist[0]=='finddate':
         if len(arglist)!= 2:
             print_usage()
         else:
             date = str(arglist[1]).zfill(2)
-            print_todos(transaction.selectDate(date))      
+            print_transactions(transaction.selectDate(date))      
     else:
         print(arglist,"is not implemented")
         print_usage()
