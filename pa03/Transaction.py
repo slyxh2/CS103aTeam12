@@ -15,7 +15,6 @@ import sqlite3
 import os
 def toDict(t):
     ''' t is a tuple (item_id, amount, category, date, description)'''
-    print('t='+str(t))
     transactions = {'item_id':t[0], 'amount':t[1], 'category':t[2], 'date':t[3], 'description': t[4]}
     return transactions
 
