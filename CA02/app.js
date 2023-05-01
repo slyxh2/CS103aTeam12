@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const layouts = require("express-ejs-layouts");
 const pw_auth_router = require('./routes/pwauth')
-
+const GPTController=require("./controller/GPTController")
 const User = require('./models/User');
 
 /* **************************************** */
@@ -108,6 +108,14 @@ app.get('/team',
   (req,res,next) => {
     res.render('team');
   }
+)
+app.get('/gegao/championPredictor', 
+  isLoggedIn,
+  GPTController.show
+)
+app.post('/gegao/showAnswer', 
+  isLoggedIn,
+  GPTController.getQuestion
 )
 
 
