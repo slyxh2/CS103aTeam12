@@ -7,7 +7,7 @@ var userSchema = Schema( {
     type:String,
     required:true
   },
-  password: {
+  passphrase: {
     type:String,
     required:true
   },
