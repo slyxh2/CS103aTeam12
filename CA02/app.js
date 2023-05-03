@@ -109,7 +109,7 @@ app.get('/team',
     res.render('team');
   }
 )
-app.get('/gegao/championPredictor', 
+app.get('/gegao/poet', 
   isLoggedIn,
   GPTController.show
 )
