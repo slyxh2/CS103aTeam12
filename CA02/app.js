@@ -97,6 +97,8 @@ app.get('/', (req,res,next) => {
   res.render('index');
 })
 
+app.get('/requests',isLoggedIn, GPTController.showRequest,GPTController.requestView)
+
 app.get('/about', 
   isLoggedIn,
   (req,res,next) => {
