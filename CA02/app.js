@@ -4,9 +4,11 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const layouts = require("express-ejs-layouts");
-const pw_auth_router = require('./routes/pwauth')
-const GPTController=require("./controller/GPTController")
+const pw_auth_router = require('./routes/pwauth');
+const GPTController=require("./controller/GPTController");
+const travelController = require('./controller/travelController');
 const User = require('./models/User');
+
 
 /* **************************************** */
 /*  Connecting to a Mongo Database Server   */
@@ -87,8 +89,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-
-
 app.use(pw_auth_router)
 
 app.use(layouts);
@@ -120,7 +120,14 @@ app.post('/gegao/showAnswer',
   GPTController.getQuestion
 )
 
-
+app.get('/travel/index', 
+  isLoggedIn,
+  travelController.show
+)
+app.post('/travel/results', 
+  isLoggedIn,
+  travelController.getQuestion
+)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
