@@ -1,4 +1,4 @@
-const api_key="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"
+const api_key="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"
 const { Configuration, OpenAIApi } = require("openai");
 const Request=require("../models/request")
 
