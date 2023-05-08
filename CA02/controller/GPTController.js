@@ -1,4 +1,9 @@
-const api_key="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"
+
+
+require('dotenv').config();
+const api_key = process.env.API_KEY;
+
+
 const { Configuration, OpenAIApi } = require("openai");
 const Request=require("../models/request")
 
