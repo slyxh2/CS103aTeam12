@@ -1,4 +1,4 @@
-const api_key="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"
+const api_key="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"
 const { Configuration, OpenAIApi } = require("openai");
 const Request=require("../models/request")
 
@@ -13,7 +13,7 @@ module.exports={
         apiKey: api_key,
       });
       const openai = new OpenAIApi(configuration);
-      const message="Help me find the top10 famous scenic spots and top 10 popular restaurants in the following places, and express them in lists:"+req.body.question
+      const message="Help me find the top10 famous scenic spots in the following places, and express them in lists:"+req.body.question
       
       const completion = await openai.createCompletion({
         model: "text-davinci-003",
